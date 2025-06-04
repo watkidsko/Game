@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Panel</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #181c24; color: #fff; }
+        .container { max-width: 700px; margin: 40px auto; background: #23283a; padding: 30px; border-radius: 10px; }
+        h1, h2 { color: #ffb347; }
+        label { display: block; margin-top: 10px; }
+        input, textarea { width: 100%; padding: 6px; margin-top: 4px; border-radius: 4px; border: 1px solid #444; background: #2d334a; color: #fff; }
+        .btn { background: #ffb347; color: #23283a; border: none; padding: 8px 16px; border-radius: 5px; cursor: pointer; margin-top: 10px; }
+        .btn:hover { background: #ffd580; }
+        .section { margin-bottom: 30px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #444; padding: 8px; text-align: left; }
+        th { background: #2d334a; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Admin Panel</h1>
+    <form method="post">
+        <h2>Add Admin Character</h2>
+        <label>Emoji: <input name="emoji" required></label>
+        <label>Name: <input name="name" required></label>
+        <label>HP: <input name="hp" type="number" required></label>
+        <label>ATK: <input name="atk" type="number" required></label>
+        <label>Skills (comma separated): <input name="skills" required></label>
+        <label>Password: <input name="password" type="password" required></label>
+        <button class="btn" name="add_character" value="1">Add Character</button>
+    </form>
+    <form method="post">
+        <h2>Add Boss</h2>
+        <label>Emoji: <input name="boss_emoji" required></label>
+        <label>Name: <input name="boss_name" required></label>
+        <label>HP: <input name="boss_hp" type="number" required></label>
+        <label>ATK: <input name="boss_atk" type="number" required></label>
+        <label>Skills (comma separated): <input name="boss_skills" required></label>
+        <label>Password: <input name="password" type="password" required></label>
+        <button class="btn" name="add_boss" value="1">Add Boss</button>
+    </form>
+    <div class="section">
+        <h2>Current Admin Characters</h2>
+        <table>
+            <tr><th>Emoji</th><th>Name</th><th>HP</th><th>ATK</th><th>Skills</th></tr>
+            {% for char in characters %}
+            <tr><td>{{ char['emoji'] }}</td><td>{{ char['name'] }}</td><td>{{ char['hp'] }}</td><td>{{ char['atk'] }}</td><td>{{ ', '.join(char['skills']) }}</td></tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="section">
+        <h2>Current Bosses</h2>
+        <table>
+            <tr><th>Emoji</th><th>Name</th><th>HP</th><th>ATK</th><th>Skills</th></tr>
+            {% for boss in bosses %}
+            <tr><td>{{ boss['emoji'] }}</td><td>{{ boss['name'] }}</td><td>{{ boss['hp'] }}</td><td>{{ boss['atk'] }}</td><td>{{ ', '.join(boss['skills']) }}</td></tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+</body>
+</html>

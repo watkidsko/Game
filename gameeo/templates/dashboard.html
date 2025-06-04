@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Game Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #181c24; color: #fff; }
+        .container { max-width: 900px; margin: 40px auto; background: #23283a; padding: 30px; border-radius: 10px; }
+        h1, h2 { color: #ffb347; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+        th, td { border: 1px solid #444; padding: 8px; text-align: left; }
+        th { background: #2d334a; }
+        .api-key { font-family: monospace; color: #b3e6ff; }
+        .section { margin-bottom: 40px; }
+        .btn { background: #ffb347; color: #23283a; border: none; padding: 8px 16px; border-radius: 5px; cursor: pointer; }
+        .btn:hover { background: #ffd580; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Game Server Dashboard</h1>
+    <div class="section">
+        <h2>Usage Stats</h2>
+        <table>
+            <tr><th>Total Battles</th><td>{{ usage['total_battles'] }}</td></tr>
+            <tr><th>Active Players</th><td>{{ usage['active_players'] }}</td></tr>
+            <tr><th>Custom Characters</th><td>{{ usage['custom_characters'] }}</td></tr>
+            <tr><th>Custom Bosses</th><td>{{ usage['custom_bosses'] }}</td></tr>
+        </table>
+    </div>
+    <div class="section">
+        <h2>API Keys</h2>
+        <table>
+            <tr><th>OpenAI</th><td class="api-key">{{ api_keys['openai'] }}</td></tr>
+            <tr><th>Other AI</th><td class="api-key">{{ api_keys['other_ai'] }}</td></tr>
+        </table>
+    </div>
+    <div class="section">
+        <h2>Characters</h2>
+        <table>
+            <tr><th>Emoji</th><th>Name</th><th>HP</th><th>ATK</th><th>Skills</th></tr>
+            {% for char in characters %}
+            <tr><td>{{ char['emoji'] }}</td><td>{{ char['name'] }}</td><td>{{ char['hp'] }}</td><td>{{ char['atk'] }}</td><td>{{ ', '.join(char['skills']) }}</td></tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="section">
+        <h2>Bosses</h2>
+        <table>
+            <tr><th>Emoji</th><th>Name</th><th>HP</th><th>ATK</th><th>Skills</th></tr>
+            {% for boss in bosses %}
+            <tr><td>{{ boss['emoji'] }}</td><td>{{ boss['name'] }}</td><td>{{ boss['hp'] }}</td><td>{{ boss['atk'] }}</td><td>{{ ', '.join(boss['skills']) }}</td></tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="section">
+        <a href="/admin" class="btn">Admin Panel</a>
+    </div>
+</div>
+</body>
+</html>

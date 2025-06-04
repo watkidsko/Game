@@ -1,0 +1,12 @@
+Updated Developer Prompt**
+_"Create a Discord bot using `discord.py` for a turn-based Battle Arena game with:_
+✅ Custom emoji-based characters with skills and upgrades  
+✅ PvP, team battles (2v2, 3v3), and **boss fights**  
+✅ Turn-based combat with **status effects**, **critical hits**, and **environmental hazards**  
+✅ Adaptive NPC AI for **smart enemy battles**  
+✅ Spectator mode, tournaments, and leaderboards  
+✅ Shops, crafting, and an **in-game economy**  
+✅ A **dynamic game grid** with **traps, buffs, and secret items**  
+✅ Regular **random events** to shake up battles  
+✅ Full Discord integration with easy command-based gameplay."
+
