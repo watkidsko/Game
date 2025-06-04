@@ -11,7 +11,10 @@ import requests
 intents = discord.Intents.default()
 intents.message_content = True
 
-bot = commands.Bot(command_prefix='!', intents=intents)
+# Set up bot to respond to @mention for chat, and ! for commands
+from discord.ext.commands import when_mentioned_or
+
+bot = commands.Bot(command_prefix=when_mentioned_or('!'), intents=intents)
 
 # Placeholder for player and battle data
 players = {}
@@ -409,6 +412,20 @@ async def chat(ctx, *, message: str):
     await ctx.trigger_typing()
     reply = ask_groq_ai(message)
     await ctx.send(reply)
+
+@bot.event
+async def on_message(message):
+    if message.author.bot:
+        return
+    # If the bot is mentioned and it's not a command, treat as chat
+    if bot.user in message.mentions and not message.content.strip().startswith('!'):
+        prompt = message.content.replace(f'<@!{bot.user.id}>', '').replace(f'<@{bot.user.id}>', '').strip()
+        if prompt:
+            await message.channel.trigger_typing()
+            reply = ask_groq_ai(prompt)
+            await message.reply(reply)
+        return
+    await bot.process_commands(message)
 
 load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '.env'))
 
